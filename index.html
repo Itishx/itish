@@ -1,0 +1,2324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Itish - The Personal Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f1ece1;
+      --paper-2: #e5dfd0;
+      --ink: #0a0a0a;
+      --ink-2: #1f1d1a;
+      --muted: #6e685c;
+      --rule: #c9c2af;
+      --rule-2: #a8a08d;
+      --accent: #ff3b2f;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    html[data-theme="dark"] {
+      --paper: #0a0a0a;
+      --paper-2: #161614;
+      --ink: #f1ece1;
+      --ink-2: #d8d2c2;
+      --muted: #8a8275;
+      --rule: #2c2a25;
+      --rule-2: #44413a;
+      --accent: #ff6853;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background-color 240ms ease, color 240ms ease;
+    }
+
+    ::selection {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    p {
+      margin: 0 0 1em;
+      text-wrap: pretty;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+      color: var(--muted);
+    }
+
+    .topbar .left,
+    .topbar .right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .topbar .center {
+      text-align: center;
+    }
+
+    .topbar .right {
+      justify-content: flex-end;
+    }
+
+    .topbar a:hover {
+      color: var(--ink);
+    }
+
+    .theme-toggle {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      padding: 5px 12px 5px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .theme-toggle:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .theme-toggle .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--ink);
+      box-shadow: inset 0 0 0 2px var(--paper);
+    }
+
+    .masthead {
+      text-align: center;
+      padding: 72px 0 0;
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+    }
+
+    .masthead .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .masthead .eyebrow .pip {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .masthead h1 {
+      margin: 0 0 24px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(72px, 13vw, 200px);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+    }
+
+    .masthead .tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(18px, 2.2vw, 26px);
+      color: var(--muted);
+      max-width: 46ch;
+      margin: 0 auto 36px;
+      line-height: 1.4;
+    }
+
+    .masthead .hero-ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .masthead .sub {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      padding: 12px 0 14px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .folio {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto auto;
+      gap: 24px;
+      padding: 12px 0;
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
+      align-items: center;
+    }
+
+    .folio .c {
+      display: flex;
+      gap: 18px;
+    }
+
+    .folio .bar {
+      height: 10px;
+      background: var(--ink);
+    }
+
+    .folio .bar.accent {
+      background: var(--accent);
+      width: 80px;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    section + section {
+      border-top: 1px solid var(--rule);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 22px;
+      margin-bottom: 56px;
+    }
+
+    .section-head .line {
+      height: 2px;
+      background: var(--ink);
+    }
+
+    .section-head .label {
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .section-head .label .num {
+      color: var(--accent);
+      margin-right: 10px;
+    }
+
+    .section-head .end {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .hero .lead .eyebrow-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 16px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero .lead .tag {
+      background: var(--accent);
+      color: var(--paper);
+      padding: 4px 10px 5px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .hero .headline {
+      margin: 0 0 28px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(56px, 8.4vw, 132px);
+      line-height: 0.93;
+      letter-spacing: -0.028em;
+    }
+
+    .hero .headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero .deck {
+      margin: 0 0 28px;
+      max-width: 44ch;
+      color: var(--ink-2);
+      font-size: 19px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .hero .byline {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero .byline strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+    }
+
+    .hero-actions a,
+    a.hero-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border: 1px solid var(--ink);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+
+    .hero-actions a.primary,
+    a.hero-actions.primary {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .hero-actions a:hover,
+    a.hero-actions:hover {
+      background: var(--accent);
+      color: var(--paper);
+      border-color: var(--accent);
+    }
+
+    .sidecol {
+      position: relative;
+    }
+
+    .sidecol::before {
+      content: "";
+      position: absolute;
+      left: -32px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--rule);
+    }
+
+    .sidecol h3 {
+      margin: 0 0 18px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 32px;
+      border-top: 1px solid var(--ink);
+      border-left: 1px solid var(--ink);
+    }
+
+    .stats > div {
+      padding: 18px 16px 20px;
+      border-right: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .stats .num {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 64px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .stats .num em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .stats .lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .now {
+      border: 2px solid var(--ink);
+      padding: 16px 18px;
+      position: relative;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-2);
+    }
+
+    .now::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid var(--ink);
+      pointer-events: none;
+    }
+
+    .now > * {
+      position: relative;
+    }
+
+    .now .label {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── Split hero ─────────────────────────────────── */
+    .split-hero {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      min-height: calc(100vh - 180px);
+      align-items: start;
+    }
+
+    .split-left {
+      position: sticky;
+      top: 56px;
+      padding-right: 56px;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-top: 8px;
+      padding-bottom: 48px;
+    }
+
+    .split-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(72px, 10vw, 120px);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .split-name .dot { color: var(--accent); }
+
+    .type-cur {
+      color: var(--accent);
+      animation: blink-cur 0.9s step-end infinite;
+      font-weight: 200;
+    }
+
+    @keyframes blink-cur {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .split-tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.35;
+      color: var(--ink-2);
+      margin: 0;
+      max-width: 28ch;
+    }
+
+    .split-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+      padding-top: 20px;
+    }
+
+    .split-meta strong { color: var(--ink); font-weight: 600; }
+
+    .split-right {
+      padding-left: 52px;
+      padding-top: 8px;
+      padding-bottom: 48px;
+    }
+
+    .split-right-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 4px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .split-right-head .label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .split-right-head .hint {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .venture-list { margin: 0; padding: 0; list-style: none; }
+
+    .venture-row {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+      cursor: pointer;
+      transition: background-color 150ms ease;
+      position: relative;
+    }
+
+    .venture-row::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 150ms ease;
+    }
+
+    .venture-row:hover { background: rgba(255,46,31,0.03); }
+    .venture-row:hover::before { opacity: 1; }
+
+    .venture-no {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .venture-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      transition: color 150ms ease;
+    }
+
+    .venture-name em { font-style: italic; color: var(--accent); }
+    .venture-row:hover .venture-name { color: var(--accent); }
+
+    .venture-badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .venture-badge .pip {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .venture-badge.live   { color: #4ade80; background: rgba(74,222,128,0.08); }
+    .venture-badge.live .pip { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.6); }
+    .venture-badge.beta   { color: #fbbf24; background: rgba(251,191,36,0.08); }
+    .venture-badge.beta .pip { background: #fbbf24; }
+    .venture-badge.hold   { color: var(--muted); background: rgba(120,116,102,0.08); }
+    .venture-badge.hold .pip { background: var(--muted); }
+    .venture-badge.closed { color: var(--muted); background: rgba(120,116,102,0.08); text-decoration: line-through; }
+    .venture-badge.closed .pip { background: var(--muted); opacity: 0.4; }
+
+    .split-footer-note {
+      margin-top: 20px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .split-footer-note::before {
+      content: "";
+      flex: 0 0 20px;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .projects {
+      border-top: 8px solid var(--ink);
+      border-bottom: 8px solid var(--ink);
+      position: relative;
+    }
+
+    .projects::before,
+    .projects::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--ink);
+    }
+
+    .projects::before {
+      top: -16px;
+    }
+
+    .projects::after {
+      bottom: -16px;
+    }
+
+    .proj {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      grid-template-rows: auto auto auto;
+      align-items: start;
+      gap: 18px 32px;
+      padding: 36px 0 40px;
+      border-top: 1px solid var(--ink);
+      cursor: pointer;
+      color: var(--ink);
+      position: relative;
+      transition: background-color 220ms ease, padding 220ms ease;
+    }
+
+    .proj:first-child {
+      border-top: 0;
+    }
+
+    .proj:hover {
+      background: var(--paper-2);
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .proj:hover .title {
+      color: var(--accent);
+    }
+
+    .proj:hover::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--accent);
+    }
+
+    .proj .title-row {
+      grid-row: 1;
+      grid-column: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .proj .no {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      padding-top: 2px;
+    }
+
+    .proj .title {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(44px, 6.4vw, 82px);
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+      transition: color 200ms ease;
+    }
+
+    .proj .title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .proj .title .domain {
+      margin-left: 12px;
+      vertical-align: middle;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: lowercase;
+    }
+
+    .proj .blurb {
+      grid-row: 2;
+      grid-column: 1;
+      margin: 0;
+      max-width: 56ch;
+      color: var(--ink-2);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .proj .tags {
+      grid-row: 3;
+      grid-column: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .proj .chip {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+      padding: 4px 10px 5px;
+      font-weight: 500;
+    }
+
+    .proj .chip.year {
+      color: var(--muted);
+      border-color: var(--rule-2);
+    }
+
+    .proj .side {
+      grid-row: 1 / span 3;
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      height: 100%;
+      text-align: right;
+    }
+
+    .proj .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 6px 12px 7px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .proj .status .pip {
+      width: 7px;
+      height: 7px;
+      display: inline-block;
+      background: var(--accent);
+    }
+
+    .proj .status.hold {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+
+    .proj .status.hold .pip {
+      background: var(--ink);
+    }
+
+    .proj .status.closed {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--rule-2);
+    }
+
+    .proj .status.closed .pip {
+      background: var(--muted);
+    }
+
+    .proj .role {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .proj .role strong {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 4px solid var(--ink);
+      border-bottom: 4px solid var(--ink);
+    }
+
+    .note {
+      padding: 32px 26px;
+      border-right: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      background: var(--paper);
+      transition: background-color 200ms ease;
+    }
+
+    .note:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .note:nth-last-child(-n + 3) {
+      border-bottom: 0;
+    }
+
+    .note:hover {
+      background: var(--paper-2);
+    }
+
+    .note:hover h4 {
+      color: var(--accent);
+    }
+
+    .note .kicker {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .note .kicker .read {
+      color: var(--muted);
+    }
+
+    .note h4 {
+      margin: 0 0 16px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      transition: color 200ms ease;
+    }
+
+    .note h4 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .note p {
+      margin: 0 0 24px;
+      color: var(--ink-2);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .note .byline {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--rule);
+      padding-top: 12px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-grid .left .label {
+      margin-bottom: 20px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .about-grid .left h2 {
+      margin: 0 0 24px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(48px, 6vw, 84px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+    }
+
+    .about-grid .left h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .about-grid .right {
+      columns: 2;
+      column-gap: 48px;
+      column-rule: 1px solid var(--rule);
+      color: var(--ink-2);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .about-grid .right p:first-child::first-letter {
+      float: left;
+      padding: 8px 12px 0 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 5.4em;
+      line-height: 0.82;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .credentials {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 4px solid var(--ink);
+      border-bottom: 4px solid var(--ink);
+    }
+
+    .credentials .item {
+      padding: 24px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .credentials .item:last-child {
+      border-right: 0;
+    }
+
+    .credentials .yr {
+      margin-bottom: 12px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .credentials h5 {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+    }
+
+    .credentials p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .contact-band {
+      background: var(--accent);
+      color: var(--paper);
+      margin: 0;
+      padding: 88px 0 96px;
+      border-top: 8px solid var(--ink);
+      border-bottom: 8px solid var(--ink);
+    }
+
+    .contact-band .wrap {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      align-items: end;
+    }
+
+    .contact-band .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      background: var(--ink);
+      padding: 6px 12px 7px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .contact-band h2 {
+      margin: 0 0 22px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(56px, 7.5vw, 112px);
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+      color: var(--paper);
+    }
+
+    .contact-band h2 em {
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    .contact-band .deck {
+      margin: 0;
+      max-width: 40ch;
+      color: var(--paper);
+      opacity: 0.88;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .contact-actions .row {
+      display: flex;
+      gap: 0;
+      border: 2px solid var(--paper);
+      background: var(--accent);
+    }
+
+    .contact-actions a {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--paper);
+    }
+
+    .contact-actions a + a {
+      border-left: 2px solid var(--paper);
+    }
+
+    .contact-actions a.primary {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .contact-actions a:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .contact-actions .note {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--paper);
+      opacity: 0.75;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .contact-actions .note:hover {
+      background: transparent;
+    }
+
+    footer {
+      padding: 80px 0 40px;
+    }
+
+    .colophon {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-top: 36px;
+      padding-bottom: 36px;
+      border-top: 4px solid var(--ink);
+      border-bottom: 4px solid var(--ink);
+    }
+
+    .colophon h6 {
+      margin: 0 0 18px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .colophon .brand h3 {
+      margin: 0 0 12px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 56px;
+      letter-spacing: -0.025em;
+      line-height: 0.9;
+      text-transform: lowercase;
+    }
+
+    .colophon .brand p {
+      margin: 0;
+      max-width: 32ch;
+      color: var(--ink-2);
+      font-style: italic;
+      font-family: var(--serif);
+      font-size: 17px;
+    }
+
+    .colophon ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .colophon li {
+      padding: 6px 0;
+      font-size: 15px;
+    }
+
+    .colophon a:hover {
+      color: var(--accent);
+    }
+
+    .copyline {
+      margin-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .modal-shade {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 240ms ease;
+      z-index: 100;
+    }
+
+    .modal-shade.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 101;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      pointer-events: none;
+    }
+
+    .modal-card {
+      width: min(960px, 100%);
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      background: var(--paper);
+      color: var(--ink);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 280ms cubic-bezier(.2, .7, .2, 1), opacity 240ms ease;
+      pointer-events: auto;
+      border: 3px solid var(--ink);
+    }
+
+    .modal.open .modal-card {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal-card .head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 32px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .modal-card .close {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-card .close:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .modal-card .body {
+      padding: 44px 48px 52px;
+    }
+
+    .modal-card .kicker {
+      display: inline-block;
+      margin-bottom: 22px;
+      padding: 5px 10px;
+      background: var(--accent);
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .modal-card h2 {
+      margin: 0 0 18px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(56px, 7vw, 96px);
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+    }
+
+    .modal-card h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .modal-card h2 .domain {
+      margin-left: 14px;
+      vertical-align: middle;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      text-transform: lowercase;
+    }
+
+    .modal-card .deck {
+      margin: 0 0 32px;
+      max-width: 56ch;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink-2);
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .modal-card .body-cols {
+      columns: 2;
+      column-gap: 48px;
+      column-rule: 1px solid var(--rule);
+      color: var(--ink-2);
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .modal-card .body-cols p {
+      margin: 0 0 1em;
+    }
+
+    .modal-card .body-cols p:first-child::first-letter {
+      float: left;
+      padding: 6px 12px 0 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 4.6em;
+      line-height: 0.82;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .modal-card .images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .placeholder {
+      aspect-ratio: 4 / 3;
+      background-color: var(--paper-2);
+      background-image: repeating-linear-gradient(135deg, transparent 0, transparent 10px, var(--rule) 10px, var(--rule) 11px);
+      border: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .modal-card .factbox {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-bottom: 28px;
+      border-top: 4px solid var(--ink);
+      border-bottom: 4px solid var(--ink);
+    }
+
+    .modal-card .factbox > div {
+      padding: 16px 18px 18px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .modal-card .factbox > div:last-child {
+      border-right: 0;
+    }
+
+    .modal-card .factbox .k {
+      margin-bottom: 8px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .modal-card .factbox .v {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .modal-card .factbox .v.accent {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .modal-card .visit {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: 0;
+    }
+
+    .modal-card .visit:hover {
+      background: var(--accent);
+      color: var(--paper);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 700ms ease, transform 700ms cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 920px) {
+      .wrap {
+        padding: 0 24px;
+      }
+
+      .topbar {
+        grid-template-columns: 1fr auto;
+      }
+
+      .topbar .left,
+      .topbar .vol-tag {
+        display: none;
+      }
+
+      .section-head {
+        grid-template-columns: auto 1fr;
+      }
+
+      .section-head .end {
+        display: none;
+      }
+
+      .folio {
+        grid-template-columns: 1fr;
+      }
+
+      .folio .bar {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .sidecol::before {
+        display: none;
+      }
+
+      .split-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .split-left {
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding-right: 0;
+        padding-bottom: 40px;
+      }
+
+      .split-right {
+        padding-left: 0;
+      }
+
+      .split-name {
+        font-size: clamp(56px, 14vw, 80px) !important;
+      }
+
+      .proj {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 28px 0;
+      }
+
+      .proj .title-row,
+      .proj .blurb,
+      .proj .tags,
+      .proj .side {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+      }
+
+      .proj .title {
+        font-size: 40px;
+      }
+
+      .proj .side {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        height: auto;
+      }
+
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .note {
+        border-right: 0;
+      }
+
+      .note:nth-last-child(-n + 3) {
+        border-bottom: 1px solid var(--ink);
+      }
+
+      .note:last-child {
+        border-bottom: 0;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .about-grid .right {
+        columns: 1;
+      }
+
+      .credentials {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .credentials .item {
+        border-right: 1px solid var(--ink);
+        border-bottom: 1px solid var(--ink);
+      }
+
+      .credentials .item:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .credentials .item:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .contact-band .wrap,
+      .colophon {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .contact-actions .row {
+        flex-direction: column;
+      }
+
+      .contact-actions a + a {
+        border-left: 0;
+        border-top: 2px solid var(--paper);
+      }
+
+      .modal {
+        padding: 16px;
+      }
+
+      .modal-card .body {
+        padding: 28px;
+      }
+
+      .modal-card h2 {
+        font-size: 48px;
+      }
+
+      .modal-card .body-cols {
+        columns: 1;
+      }
+
+      .modal-card .images {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-card .factbox {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .modal-card .factbox > div:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .modal-card .factbox > div:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--ink);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="left mono">
+        <a href="#projects">Work</a>
+        <a href="builds.html">Builds</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="center mono" id="dateline">Friday, May 15, 2026</div>
+      <div class="right">
+        <span class="mono vol-tag" style="opacity:.7">Vol. I · Portfolio Index</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="dot"></span>
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </div>
+
+    <header class="masthead">
+      <div class="eyebrow mono"><span class="pip"></span>Founder · Maker · Builder · Bangalore</div>
+      <h1><span id="fullnameTyped"></span><span class="type-cur">|</span></h1>
+      <p class="tagline">Products, communities, and things worth building — a living index of everything I keep making.</p>
+      <div class="hero-ctas">
+        <a class="primary hero-actions" href="#about">About me &rarr;</a>
+        <a class="hero-actions" href="#projects">View index &rarr;</a>
+      </div>
+      <div class="sub mono">
+        <span><span class="pip"></span>The Personal Edition</span>
+        <span>08 ventures · Est. 2020</span>
+        <span>&darr; Scroll for index</span>
+      </div>
+    </header>
+
+    <div class="folio mono">
+      <div class="bar accent"></div>
+      <div class="c">Founder / Maker / Builder</div>
+      <div class="c">08 ventures indexed</div>
+      <div class="c">02 active right now</div>
+      <div class="bar" style="width:48px;"></div>
+    </div>
+
+    <section id="about">
+      <div class="section-head reveal">
+        <div class="label"><span class="num">§ 02</span>Who Is Itish?</div>
+        <div class="line"></div>
+        <div class="end">About</div>
+      </div>
+
+      <div class="about-grid reveal">
+        <div class="left">
+          <div class="label">About</div>
+          <h2>I make small things, <em>mostly</em> because I cannot stop.</h2>
+          <p style="color:var(--muted);font-style:italic;font-size:17px;">A working biography, revised by whatever gets built next.</p>
+        </div>
+        <div class="right">
+          <p>I've been building things since I was 18, not because I had a master plan, but because I kept finding problems that felt too interesting to leave alone. I grew a writing community called <em>@writix</em> to 14k followers on Instagram, writing about love, life, and healing.</p>
+          <p>That turned into BrownieBlend, a paid newsletter. Then came Maadsocial, a marketing agency. Then Av8studio, bigger. Each one taught me something the last one could not.</p>
+          <p>Now I'm working on <em>Realyst</em>, a LinkedIn alternative built for people, not recruiters, and <em>Sidebrain</em>, a second brain for builders like me.</p>
+          <p>I do not ship products for the sake of it. I stay with a problem until the right answer starts to feel obvious. If you are reading this, you probably care about building in that same way.</p>
+        </div>
+      </div>
+
+      <div class="credentials reveal">
+        <div class="item">
+          <div class="yr">2025 - Present</div>
+          <h5>Realyst</h5>
+          <p>Building a more human professional network around work, identity, and connection.</p>
+        </div>
+        <div class="item">
+          <div class="yr">2026 - Present</div>
+          <h5>Sidebrain</h5>
+          <p>Making productivity software that feels closer to how builders actually think.</p>
+        </div>
+        <div class="item">
+          <div class="yr">2022 - 2025</div>
+          <h5>Writix · BrownieBlend</h5>
+          <p>Creator-led writing, community, and an audience that became something real.</p>
+        </div>
+        <div class="item">
+          <div class="yr">2023 - 2024</div>
+          <h5>Maadsocial · Av8studio</h5>
+          <p>Agency work that sharpened taste, positioning, and the operator side of building.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-head reveal">
+        <div class="label"><span class="num">§ 03</span>The Index</div>
+        <div class="line"></div>
+        <div class="end">08 entries / Click to read</div>
+      </div>
+
+      <div class="projects">
+        <div class="proj reveal" data-project="sidebrain">
+          <div class="title-row">
+            <span class="no">01</span>
+            <h3 class="title">Side<em>brain</em><span class="domain">↗ sidebrain.co</span></h3>
+          </div>
+          <p class="blurb">Your second brain for side projects. Built for builders who never stop and ideas that refuse to sit still.</p>
+          <div class="tags">
+            <span class="chip">Productivity</span>
+            <span class="chip">AI</span>
+            <span class="chip">Active</span>
+            <span class="chip year">Apr 3, 2026 - Present</span>
+          </div>
+          <div class="side">
+            <span class="status"><span class="pip"></span>Live</span>
+            <span class="role"><strong>Current focus</strong>Productivity / AI</span>
+          </div>
+        </div>
+
+        <div class="proj reveal" data-project="realyst">
+          <div class="title-row">
+            <span class="no">02</span>
+            <h3 class="title">Realyst<span class="domain">↗ realyst.app</span></h3>
+          </div>
+          <p class="blurb">A LinkedIn alternative built for people, not recruiters. Networking reimagined around authentic work and real connections.</p>
+          <div class="tags">
+            <span class="chip">Networking</span>
+            <span class="chip">Careers</span>
+            <span class="chip">Active</span>
+            <span class="chip year">Dec 25, 2025 - Present</span>
+          </div>
+          <div class="side">
+            <span class="status"><span class="pip"></span>Live</span>
+            <span class="role"><strong>Current focus</strong>Professional network</span>
+          </div>
+        </div>
+
+        <div class="proj reveal" data-project="av8studio">
+          <div class="title-row">
+            <span class="no">03</span>
+            <h3 class="title">Av8<em>studio</em></h3>
+          </div>
+          <p class="blurb">A fuller-scale creative marketing agency with bigger scope than Maadsocial, built for brands that wanted more than execution.</p>
+          <div class="tags">
+            <span class="chip">Marketing</span>
+            <span class="chip">Agency</span>
+            <span class="chip">On Hold</span>
+            <span class="chip year">Paused</span>
+          </div>
+          <div class="side">
+            <span class="status hold"><span class="pip"></span>On Hold</span>
+            <span class="role"><strong>Agency expansion</strong>Bigger than Maadsocial</span>
+          </div>
+        </div>
+
+        <div class="proj reveal" data-project="writix">
+          <div class="title-row">
+            <span class="no">04</span>
+            <h3 class="title">Writ<em>ix</em><span class="domain">↗ instagram.com/writix</span></h3>
+          </div>
+          <p class="blurb">Writing about love, life, and healing. A creator-led community that grew to 14k followers and became a real creative foundation.</p>
+          <div class="tags">
+            <span class="chip">Writing</span>
+            <span class="chip">Creator</span>
+            <span class="chip">On Hold</span>
+            <span class="chip year">Dec 14, 2022 - Jan 2025</span>
+          </div>
+          <div class="side">
+            <span class="status hold"><span class="pip"></span>On Hold</span>
+            <span class="role"><strong>Creator brand</strong>14k follower community</span>
+          </div>
+        </div>
+
+        <div class="proj reveal" data-project="brownieblend">
+          <div class="title-row">
+            <span class="no">05</span>
+            <h3 class="title">Brownie<em>Blend</em></h3>
+          </div>
+          <p class="blurb">A paid newsletter that extended the Writix world, turning a writing audience into a more intimate reader community.</p>
+          <div class="tags">
+            <span class="chip">Newsletter</span>
+            <span class="chip">Creator</span>
+            <span class="chip">Closed</span>
+            <span class="chip year">Jul 10, 2024 - Feb 2025</span>
+          </div>
+          <div class="side">
+            <span class="status closed"><span class="pip"></span>Closed</span>
+            <span class="role"><strong>Writix extension</strong>Paid reader layer</span>
+          </div>
+        </div>
+
+        <div class="proj reveal" data-project="maadsocial">
+          <div class="title-row">
+            <span class="no">06</span>
+            <h3 class="title">Maad<em>social</em></h3>
+          </div>
+          <p class="blurb">A full-service social media marketing agency for growing brands and an early step in learning how service businesses really work.</p>
+          <div class="tags">
+            <span class="chip">Marketing</span>
+            <span class="chip">Agency</span>
+            <span class="chip">Closed</span>
+            <span class="chip year">Jul 21, 2023 - Feb 2024</span>
+          </div>
+          <div class="side">
+            <span class="status closed"><span class="pip"></span>Closed</span>
+            <span class="role"><strong>Earlier chapter</strong>Client work / growth</span>
+          </div>
+        </div>
+
+        <div class="proj reveal" data-project="learnor">
+          <div class="title-row">
+            <span class="no">07</span>
+            <h3 class="title">Learn<em>or</em></h3>
+          </div>
+          <p class="blurb">A learning platform for the curious adult — short courses by people who actually do the thing, not just talk about it.</p>
+          <div class="tags">
+            <span class="chip">Marketplace</span>
+            <span class="chip">Education</span>
+            <span class="chip">On Hold</span>
+            <span class="chip year">May 2, 2021 - Aug 2023</span>
+          </div>
+          <div class="side">
+            <span class="status hold"><span class="pip"></span>On Hold</span>
+            <span class="role"><strong>Founder</strong>2 yrs operated</span>
+          </div>
+        </div>
+
+        <div class="proj reveal" data-project="levels">
+          <div class="title-row">
+            <span class="no">08</span>
+            <h3 class="title">Levels<span class="domain">↗ levels.io</span></h3>
+          </div>
+          <p class="blurb">A quiet little app for measuring the things that actually move — sleep, focus, the number of pages read. No streaks, no shame.</p>
+          <div class="tags">
+            <span class="chip">Mobile</span>
+            <span class="chip">Self-knowledge</span>
+            <span class="chip">In Beta</span>
+            <span class="chip year">Sep 8, 2025 - Present</span>
+          </div>
+          <div class="side">
+            <span class="status"><span class="pip"></span>In Beta</span>
+            <span class="role"><strong>Maker</strong>Invite-only beta</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mono reveal" style="margin-top:18px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <span>Click any row to open the full entry</span>
+        <span>End of index</span>
+      </div>
+    </section>
+
+    <section id="principles">
+      <div class="section-head reveal">
+        <div class="label"><span class="num">§ 04</span>Working Principles</div>
+        <div class="line"></div>
+        <div class="end">The recurring themes</div>
+      </div>
+
+      <div class="notes-grid reveal">
+        <article class="note">
+          <div class="kicker"><span>Principle</span><span class="read">01</span></div>
+          <h4>Build things that feel more <em>human</em>.</h4>
+          <p>The work keeps circling back to the same belief: products should respect attention, reflect real people, and avoid becoming louder than the problem they solve.</p>
+          <div class="byline"><span>People first</span><span>Products</span></div>
+        </article>
+        <article class="note">
+          <div class="kicker"><span>Principle</span><span class="read">02</span></div>
+          <h4>Use side projects as a <em>laboratory</em>.</h4>
+          <p>Communities, newsletters, software, and services all teach different lessons. The overlap is where the interesting systems and better instincts start to show up.</p>
+          <div class="byline"><span>Experiments</span><span>Practice</span></div>
+        </article>
+        <article class="note">
+          <div class="kicker"><span>Principle</span><span class="read">03</span></div>
+          <h4>Obsess until the solution feels <em>inevitable</em>.</h4>
+          <p>That is the through-line from writing communities to career networks: stay with the problem long enough that the final shape stops feeling optional.</p>
+          <div class="byline"><span>Craft</span><span>Patience</span></div>
+        </article>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="contact-band" id="contact">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="label">Open Line</div>
+        <h2>If you're building something useful, say <em>hello</em>.</h2>
+        <p class="deck">I like meeting founders, operators, creators, and people working on thoughtful internet things. If there is something interesting to build, write, or untangle, reach out.</p>
+      </div>
+      <div class="contact-actions reveal">
+        <div class="row">
+          <a class="primary" href="mailto:hi@itish.io">Email me &rarr;</a>
+          <a href="builds.html">Open builds &rarr;</a>
+        </div>
+        <div class="note">hi@itish.io · Usually replies faster than expected</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      <div class="section-head reveal" style="margin-bottom:24px;">
+        <div class="label"><span class="num">§ 05</span>Colophon &amp; Contact</div>
+        <div class="line"></div>
+        <div class="end">End</div>
+      </div>
+
+      <div class="colophon reveal">
+        <div class="brand">
+          <h3>itish</h3>
+          <p>A personal index of ventures, experiments, and the work still in motion.</p>
+        </div>
+        <div>
+          <h6>Pages</h6>
+          <ul>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="builds.html">Builds</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h6>Connect</h6>
+          <ul>
+            <li><a href="mailto:hi@itish.io">hi@itish.io</a></li>
+            <li><a href="https://instagram.com/writix" target="_blank" rel="noreferrer">@writix</a></li>
+            <li><a href="https://sidebrain.co" target="_blank" rel="noreferrer">Sidebrain</a></li>
+            <li><a href="https://realyst.app" target="_blank" rel="noreferrer">Realyst</a></li>
+          </ul>
+        </div>
+        <div>
+          <h6>This site</h6>
+          <ul>
+            <li>Set in Instrument Serif and IBM Plex.</li>
+            <li>Built as a brutalist editorial archive.</li>
+            <li>Updated whenever the work changes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyline mono">
+        <span>&copy; 2026 Itish. All rights reserved.</span>
+        <span>Build small. Stay curious. Keep going.</span>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal-shade" id="modalShade"></div>
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="head">
+        <span class="mono" id="modalKicker">Project</span>
+        <span class="mono" id="modalRef">itish / index</span>
+        <button class="close" id="modalClose" aria-label="Close">×</button>
+      </div>
+      <div class="body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const storedTheme = localStorage.getItem('theme');
+
+    function syncThemeLabel() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      themeLabel.textContent = isDark ? 'Light' : 'Dark';
+    }
+
+    if (storedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    syncThemeLabel();
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      syncThemeLabel();
+    });
+
+    const dateline = document.getElementById('dateline');
+    if (dateline) {
+      const now = new Date();
+      dateline.textContent = now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -80px 0px', threshold: 0.05 });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+    const PROJECTS = {
+      sidebrain: {
+        title: 'Sidebrain',
+        accent: 'brain',
+        domain: 'sidebrain.co',
+        link: 'https://sidebrain.co',
+        deck: 'Your second brain for side projects. Built for builders who never stop and ideas that refuse to sit still.',
+        kicker: '01 · Active venture',
+        status: 'Live',
+        year: 'Apr 3, 2026 - Present',
+        format: 'Productivity / AI',
+        note: 'Built for builders',
+        body: [
+          'Sidebrain is the product closest to how I naturally work. It is built for ideas that arrive half-formed, side-on, and usually in the middle of something else. Instead of forcing neat structure too early, it is meant to help builders capture and shape momentum while it is still alive.',
+          'The core idea is simple: side projects deserve a better memory system. That means less friction, faster capture, and a product that understands how messy creative progress can look before it turns into something useful.',
+          'It is also a personal test of what calmer productivity software can feel like when it is designed around builders instead of dashboards.'
+        ]
+      },
+      realyst: {
+        title: 'Realyst',
+        accent: '',
+        domain: 'realyst.app',
+        link: 'https://realyst.app',
+        deck: 'A LinkedIn alternative built for people, not recruiters. Networking reimagined around authentic work and real connections.',
+        kicker: '02 · Active venture',
+        status: 'Live',
+        year: 'Dec 25, 2025 - Present',
+        format: 'Networking / Careers',
+        note: 'People-first network',
+        body: [
+          'Realyst comes from a frustration with how performative professional platforms have become. The idea is not to make another resume machine. It is to build a place where work, identity, and connection feel more human and less transactional.',
+          'The product is oriented around people rather than recruiters. That changes the tone of the experience, the kinds of signals that matter, and the sort of relationships the platform should make easier to build.',
+          'For me, it is one of the clearest expressions of a recurring theme in my work: software should make people feel more seen, not more optimized.'
+        ]
+      },
+      av8studio: {
+        title: 'Av8studio',
+        accent: 'studio',
+        domain: '',
+        link: '',
+        deck: 'A fuller-scale creative marketing agency with bigger scope than Maadsocial, built for brands that wanted more than execution.',
+        kicker: '03 · On hold',
+        status: 'On hold',
+        year: 'Paused',
+        format: 'Marketing / Agency',
+        note: 'Scope expanded',
+        body: [
+          'Av8studio was the natural extension of lessons learned from Maadsocial. The ambition was bigger, the scope wider, and the creative expectations sharper. It was not just about running campaigns. It was about building a broader studio practice.',
+          'That broader ambition is exactly what made it interesting. It also made it something that needed the right timing and attention to do properly, which is why it is currently on hold rather than rushed into the wrong shape.',
+          'Even paused projects leave behind useful instincts. Av8studio sharpened mine around taste, clarity, and what kind of client work is actually worth doing.'
+        ]
+      },
+      writix: {
+        title: 'Writix',
+        accent: 'ix',
+        domain: 'instagram.com/writix',
+        link: 'https://instagram.com/writix',
+        deck: 'Writing about love, life, and healing. A creator-led community that grew to 14k followers and became a real creative foundation.',
+        kicker: '04 · Creator chapter',
+        status: 'On hold',
+        year: 'Dec 14, 2022 - Jan 2025',
+        format: 'Writing / Creator',
+        note: '14k follower community',
+        body: [
+          'Writix started as a writing outlet and became a community. It was a place to write honestly about love, life, healing, and the quieter emotional parts of growing up on the internet.',
+          'What mattered most was not the follower count, though 14k made it real in a visible way. What mattered was discovering that words could gather people, shape identity, and become the starting point for entirely new kinds of work.',
+          'A lot of what came later traces back to Writix. It taught me audience, voice, and what it means when a creative practice starts turning into infrastructure.'
+        ]
+      },
+      brownieblend: {
+        title: 'BrownieBlend',
+        accent: 'Blend',
+        domain: '',
+        link: '',
+        deck: 'A paid newsletter that extended the Writix world, turning a writing audience into a more intimate reader community.',
+        kicker: '05 · Closed chapter',
+        status: 'Closed',
+        year: 'Jul 10, 2024 - Feb 2025',
+        format: 'Newsletter / Creator',
+        note: 'Extension of Writix',
+        body: [
+          'BrownieBlend grew directly out of Writix. Where the Instagram audience was broad and public, this became a more intentional space for readers who wanted to stay closer to the writing.',
+          'It was less about scale and more about intimacy. A paid newsletter changes the relationship between writer and reader, and that was part of the experiment: what happens when the audience becomes smaller, more invested, and more present.',
+          'Even though it is closed, it remains an important bridge between audience-building and the larger product thinking that followed.'
+        ]
+      },
+      maadsocial: {
+        title: 'Maadsocial',
+        accent: 'social',
+        domain: '',
+        link: '',
+        deck: 'A full-service social media marketing agency for growing brands and an early step in learning how service businesses really work.',
+        kicker: '06 · Closed chapter',
+        status: 'Closed',
+        year: 'Jul 21, 2023 - Feb 2024',
+        format: 'Marketing / Agency',
+        note: 'Operator training ground',
+        body: [
+          'Maadsocial was one of the first times building stopped being abstract and became operational. It meant clients, deadlines, outcomes, and the discipline of turning taste into a repeatable service.',
+          'It helped me learn the unglamorous parts of the work: managing expectations, building systems, and finding the line between creative quality and business reality.',
+          'Closed does not mean unimportant. Maadsocial was an early training ground for the operator side of everything I have built since.'
+        ]
+      },
+      learnor: {
+        title: 'Learnor',
+        accent: 'or',
+        domain: '',
+        link: '',
+        deck: 'A learning platform for the curious adult — short courses by people who actually do the thing, not just talk about it.',
+        kicker: '07 · On hold',
+        status: 'On hold',
+        year: 'May 2, 2021 - Aug 2023',
+        format: 'Marketplace / Education',
+        note: 'Loved, learned from',
+        body: [
+          'Learnor was built on a simple frustration: most online learning is either too academic or too shallow. The idea was a marketplace where practitioners — people who actually do the work — could teach short, honest courses to curious adults who wanted to learn from real experience.',
+          'It ran for two years and attracted a community that genuinely cared about the format. The quality bar was intentionally high, which kept it boutique. That was a deliberate choice, not a scaling failure.',
+          'It is on hold rather than gone. The instinct behind it — that the best teachers are practitioners, not just educators — still feels right and worth returning to.'
+        ]
+      },
+      levels: {
+        title: 'Levels',
+        accent: '',
+        domain: 'levels.io',
+        link: 'https://levels.io',
+        deck: 'A quiet little app for measuring the things that actually move — sleep, focus, the number of pages read. No streaks, no shame.',
+        kicker: '08 · In beta',
+        status: 'In Beta',
+        year: 'Sep 8, 2025 - Present',
+        format: 'Mobile / Self-knowledge',
+        note: 'Invite-only beta',
+        body: [
+          'Levels is built around a quiet argument: most self-tracking apps are too noisy, too gamified, and too focused on streaks and shame. This one is the opposite. It tracks the things that actually matter — sleep quality, focus time, pages read — and does nothing dramatic with the data.',
+          'The design is deliberately calm. No dashboards crowded with metrics, no push notifications designed to provoke anxiety. Just a clear, honest record of how the day actually went.',
+          'It is in invite-only beta right now, growing slowly by word of mouth. That pace is intentional. The product works best when the people using it are genuinely interested in the idea, not just in collecting another app.'
+        ]
+      }
+    };
+
+    const modal = document.getElementById('modal');
+    const shade = document.getElementById('modalShade');
+    const modalBody = document.getElementById('modalBody');
+    const modalKicker = document.getElementById('modalKicker');
+    const modalRef = document.getElementById('modalRef');
+    const closeBtn = document.getElementById('modalClose');
+
+    function formatTitle(project) {
+      if (!project.accent) return project.title;
+      const safeTitle = project.title;
+      const safeAccent = project.accent;
+      const index = safeTitle.toLowerCase().lastIndexOf(safeAccent.toLowerCase());
+      if (index === -1) return safeTitle;
+      const before = safeTitle.slice(0, index);
+      const match = safeTitle.slice(index, index + safeAccent.length);
+      const after = safeTitle.slice(index + safeAccent.length);
+      return `${before}<em>${match}</em>${after}`;
+    }
+
+    function openProject(key) {
+      const project = PROJECTS[key];
+      if (!project) return;
+
+      modalKicker.textContent = project.kicker;
+      modalRef.textContent = `itish / index / ${key}`;
+
+      const domainMarkup = project.domain ? `<span class="domain">${project.domain}</span>` : '';
+      const visitMarkup = project.link
+        ? `<a class="visit" href="${project.link}" target="_blank" rel="noreferrer">Open link &rarr;</a>`
+        : `<span class="visit" style="opacity:.6;cursor:default;">Archive only</span>`;
+
+      modalBody.innerHTML = `
+        <div class="kicker">Filed under ${project.kicker}</div>
+        <h2>${formatTitle(project)}${domainMarkup}</h2>
+        <p class="deck">${project.deck}</p>
+        <div class="body-cols">
+          ${project.body.map((paragraph) => `<p>${paragraph}</p>`).join('')}
+        </div>
+        <div class="images">
+          <div class="placeholder">Archive image<br />Placeholder for future upload</div>
+          <div class="placeholder">Detail image<br />Placeholder for future upload</div>
+        </div>
+        <div class="factbox">
+          <div>
+            <div class="k">Status</div>
+            <div class="v accent">${project.status}</div>
+          </div>
+          <div>
+            <div class="k">Window</div>
+            <div class="v">${project.year}</div>
+          </div>
+          <div>
+            <div class="k">Format</div>
+            <div class="v">${project.format}</div>
+          </div>
+          <div>
+            <div class="k">Note</div>
+            <div class="v">${project.note}</div>
+          </div>
+        </div>
+        ${visitMarkup}
+      `;
+
+      shade.classList.add('open');
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      shade.classList.remove('open');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.proj, .venture-row').forEach((element) => {
+      element.addEventListener('click', () => openProject(element.getAttribute('data-project')));
+    });
+
+    shade.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    // Full name typing animation into main heading
+    (function () {
+      const el  = document.getElementById('fullnameTyped');
+      const cur = document.querySelector('.type-cur');
+      if (!el) return;
+      const text = 'Itish Pande';
+      let i = 0;
+      function typeNext() {
+        if (i <= text.length) {
+          el.textContent = text.slice(0, i++);
+          setTimeout(typeNext, i === 1 ? 500 : 90);
+        } else {
+          setTimeout(() => { if (cur) cur.style.animation = 'none'; cur.style.opacity = '0'; }, 2000);
+        }
+      }
+      setTimeout(typeNext, 300);
+    })();
+  </script>
+</body>
+</html>

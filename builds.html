@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Builds — Itish</title>
+  <script>if (localStorage.getItem('theme') !== 'light') document.documentElement.classList.add('dark');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="builds.css" />
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="topnav">
+    <a href="index.html" class="brand">itish<span class="dot">.</span></a>
+    <div class="links">
+      <a href="builds.html" class="active">Builds</a>
+      <a href="index.html#about">About</a>
+      <a href="mailto:hi@itish.io" class="email">hi@itish.io</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"><span class="moon"></span></button>
+    </div>
+  </nav>
+
+  <header class="hero-builds">
+    <div class="kicker">Wiki</div>
+    <h1>Builds</h1>
+    <p>Every startup, project, and experiment — documented. From first idea to final lesson.</p>
+  </header>
+
+  <hr class="divider" />
+
+  <div class="filters" role="tablist">
+    <button class="filter" data-f="all" aria-selected="true">All <span class="count">07</span></button>
+    <button class="filter" data-f="active">Active <span class="count">03</span></button>
+    <button class="filter" data-f="beta">Beta / WIP <span class="count">02</span></button>
+    <button class="filter" data-f="hold">On Hold <span class="count">02</span></button>
+  </div>
+
+  <div class="builds-grid" id="builds">
+
+    <article class="build-card-new" data-status="active">
+      <div class="card-top">
+        <div class="cats"><span>Real Estate</span><span>B2B SaaS</span></div>
+        <span class="status live"><span class="pip"></span>Live</span>
+      </div>
+      <h3>Realyst</h3>
+      <div class="dates">Dec 25, 2024 — Present</div>
+      <p class="desc">A workspace for real-estate operators — listings, deals, and the dozen spreadsheets in between, finally in one place. Built quietly, growing through word of mouth.</p>
+      <div class="card-footer">
+        <span class="role"><strong>Founder &amp; CEO</strong> · Full-time</span>
+        <span class="arrow">→</span>
+      </div>
+    </article>
+
+    <article class="build-card-new" data-status="active">
+      <div class="card-top">
+        <div class="cats"><span>Productivity</span><span>AI</span></div>
+        <span class="status live"><span class="pip"></span>Live</span>
+      </div>
+      <h3>Side<em>brain</em></h3>
+      <div class="dates">Apr 3, 2023 — Present</div>
+      <p class="desc">Your second brain for side projects. Captures ideas the way you actually have them — sideways, half-finished, in passing. Built for people who never stop building.</p>
+      <div class="card-footer">
+        <span class="role"><strong>Creator</strong> · Solo build</span>
+        <span class="arrow">→</span>
+      </div>
+    </article>
+
+    <article class="build-card-new" data-status="active">
+      <div class="card-top">
+        <div class="cats"><span>Marketing</span><span>Agency</span></div>
+        <span class="status live"><span class="pip"></span>Live</span>
+      </div>
+      <h3>Maad<em>Social</em></h3>
+      <div class="dates">Feb 11, 2022 — Present</div>
+      <p class="desc">A small marketing agency for founders who'd rather not think about marketing. Strategy, content, and the occasional rescue mission. Boutique by design.</p>
+      <div class="card-footer">
+        <span class="role"><strong>Founder</strong> · Strategy + ops</span>
+        <span class="arrow">→</span>
+      </div>
+    </article>
+
+    <article class="build-card-new" data-status="beta">
+      <div class="card-top">
+        <div class="cats"><span>Mobile</span><span>Self-knowledge</span></div>
+        <span class="status beta"><span class="pip"></span>In Beta</span>
+      </div>
+      <h3>Levels</h3>
+      <div class="dates">Sep 8, 2025 — Present</div>
+      <p class="desc">A quiet little app for measuring the things that actually move — sleep, focus, the number of pages read. No streaks, no shame. Invite-only beta.</p>
+      <div class="card-footer">
+        <span class="role"><strong>Maker</strong> · Solo build</span>
+        <span class="arrow">→</span>
+      </div>
+    </article>
+
+    <article class="build-card-new" data-status="beta">
+      <div class="card-top">
+        <div class="cats"><span>Writing</span><span>Desktop App</span></div>
+        <span class="status wip"><span class="pip"></span>In Progress</span>
+      </div>
+      <h3>Writ<em>ix</em></h3>
+      <div class="dates">Jan 14, 2026 — Present</div>
+      <p class="desc">A writing app that refuses to be a productivity app. Plain text, generous margins, and the world's most polite cursor. Private alpha, soft launch soon.</p>
+      <div class="card-footer">
+        <span class="role"><strong>Maker</strong> · Soft launch soon</span>
+        <span class="arrow">→</span>
+      </div>
+    </article>
+
+    <article class="build-card-new" data-status="hold">
+      <div class="card-top">
+        <div class="cats"><span>Marketplace</span><span>Education</span></div>
+        <span class="status archived">
+          <span class="icon"><i></i><i></i></span>On Hold
+        </span>
+      </div>
+      <h3>Learn<em>or</em></h3>
+      <div class="dates">May 2, 2021 — Aug 2023</div>
+      <p class="desc">A learning platform for the curious adult — short courses by people who actually do the thing, not just talk about it. Loved, learned from, archived.</p>
+      <div class="card-footer">
+        <span class="role"><strong>Founder</strong> · 2 yrs operated</span>
+        <span class="arrow">→</span>
+      </div>
+    </article>
+
+    <article class="build-card-new" data-status="hold">
+      <div class="card-top">
+        <div class="cats"><span>Food &amp; Beverage</span><span>Consumer</span></div>
+        <span class="status archived">
+          <span class="icon"><i></i><i></i></span>On Hold
+        </span>
+      </div>
+      <h3>Brownie<em>blend</em></h3>
+      <div class="dates">Jun 18, 2020 — Oct 2022</div>
+      <p class="desc">A small-batch dessert brand born from a kitchen experiment that got slightly out of hand. Brownies, mostly. Currently dormant — recipe is safe.</p>
+      <div class="card-footer">
+        <span class="role"><strong>Co-founder</strong> · Bangalore</span>
+        <span class="arrow">→</span>
+      </div>
+    </article>
+
+  </div>
+
+  <footer class="foot">
+    <span>© 2026 Itish · Built quietly in Bangalore</span>
+    <div class="right">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="mailto:hi@itish.io">hi@itish.io</a>
+    </div>
+  </footer>
+</div>
+
+<script src="app.js"></script>
+<script src="builds.js"></script>
+</body>
+</html>
