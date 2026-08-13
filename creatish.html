@@ -25,10 +25,12 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
         </button>
         <a class="wordmark" href="index.html">Creatish Inc.</a>
-        <div class="search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input type="text" id="searchInput" placeholder="Search" aria-label="Search this page" />
-        </div>
+      </div>
+      <div class="nav-center">
+        <button class="mega-trigger" id="megaTrigger" aria-expanded="false" aria-controls="megaMenu">
+          <span>Explore</span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
       </div>
       <div class="nav-right">
         <button class="action theme-btn" id="themeBtn" aria-label="Toggle dark mode">
@@ -40,6 +42,38 @@
       </div>
     </div>
   </nav>
+
+  <div class="mega-menu" id="megaMenu">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <h4>Read</h4>
+        <a href="index.html">Home</a>
+        <a href="writix.html">Writix</a>
+        <a href="creatish.html">Creatish</a>
+      </div>
+      <div class="mega-col">
+        <h4>Active Ventures</h4>
+        <a href="creatish.html">Braino</a>
+        <a href="https://realyst.app" target="_blank" rel="noreferrer">Realyst</a>
+      </div>
+      <div class="mega-col">
+        <h4>The Archive</h4>
+        <a href="https://levels.io" target="_blank" rel="noreferrer">Levels</a>
+        <a href="creatish.html#learnor">Learnor</a>
+        <a href="creatish.html#av8studio">Av8studio</a>
+        <a href="creatish.html#maadsocial">Maadsocial</a>
+        <a href="creatish.html#brownieblend">BrownieBlend</a>
+        <a href="creatish.html#snapix">Snapix</a>
+        <a href="creatish.html#doctor-alien">Doctor Alien</a>
+      </div>
+      <div class="mega-col">
+        <h4>Connect</h4>
+        <a href="mailto:hi@itish.io">hi@itish.io</a>
+        <a href="https://instagram.com/writix" target="_blank" rel="noreferrer">@writix</a>
+      </div>
+    </div>
+  </div>
+  <div class="mega-backdrop" id="megaBackdrop"></div>
 
   <aside class="sidebar">
     <a class="side-item" href="index.html">
@@ -56,11 +90,6 @@
     </a>
 
     <div class="side-rule"></div>
-
-    <a class="side-item" href="#authorCard">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Following
-    </a>
 
     <div class="side-note">
       <span class="add">+</span>
@@ -136,15 +165,15 @@
         <h2>Everything Built So Far</h2>
         <p>Every venture, whether it lived, closed, or quietly turned into something else, is part of the same operating memory. Here's the whole thing, in the order I lived it, which is not always the order the dates would suggest, and I've decided that's the correct order:</p>
         <ul>
-          <li><strong>Doctor Alien</strong> — a 15-book series I wrote by hand starting at age 10, because I'd gotten obsessed with Geronimo Stilton and figured I could just make my own. Tiny notebooks from a stationery store, every word handwritten, every cover designed and colored myself. I still have all fifteen. <span class="status">· Where this whole thing actually started</span></li>
-          <li><strong>Snapix</strong> — a photography Instagram account, back when I was teaching myself to shoot and edit in Snapseed. Less a business, more the first time I realized I liked building an audience around something I made. <span class="status">· Early chapter</span></li>
+          <li id="doctor-alien"><strong>Doctor Alien</strong> — a 15-book series I wrote by hand starting at age 10, because I'd gotten obsessed with Geronimo Stilton and figured I could just make my own. Tiny notebooks from a stationery store, every word handwritten, every cover designed and colored myself. I still have all fifteen. <span class="status">· Where this whole thing actually started</span></li>
+          <li id="snapix"><strong>Snapix</strong> — a photography Instagram account, back when I was teaching myself to shoot and edit in Snapseed. Less a business, more the first time I realized I liked building an audience around something I made. <span class="status">· Early chapter</span></li>
           <li><strong><a href="writix.html">Writix</a></strong> — writing about love, life, and healing. I've always been the overemotional type who could write, so I started a page, and it grew into a creator-led community of 14k. <span class="status">· On hold, 2022–2025</span></li>
-          <li><strong>BrownieBlend</strong> — a paid newsletter that pulled the Writix world into something smaller and more intimate. <span class="status">· Closed, 2024–2025</span></li>
-          <li><strong>Av8studio</strong> — a bigger creative marketing agency, for brands that wanted more than someone just executing their ideas. <span class="status">· On hold</span></li>
-          <li><strong>Maadsocial</strong> — a full-service social media agency, and the thing that finally taught me service businesses aren't for me. Shutting this down is basically where the next chapter starts. <span class="status">· Closed, 2023–2024</span></li>
+          <li id="brownieblend"><strong>BrownieBlend</strong> — a paid newsletter that pulled the Writix world into something smaller and more intimate. <span class="status">· Closed, 2024–2025</span></li>
+          <li id="av8studio"><strong>Av8studio</strong> — a bigger creative marketing agency, for brands that wanted more than someone just executing their ideas. <span class="status">· On hold</span></li>
+          <li id="maadsocial"><strong>Maadsocial</strong> — a full-service social media agency, and the thing that finally taught me service businesses aren't for me. Shutting this down is basically where the next chapter starts. <span class="status">· Closed, 2023–2024</span></li>
           <li><strong><a href="https://realyst.app" target="_blank" rel="noreferrer">Realyst</a></strong> — after Maadsocial closed, I got introduced to Lovable and basically started living in the AI era. Realyst came out of that, and honestly out of how pretentious LinkedIn has gotten. A networking app for people, not recruiters performing for each other. <span class="status">· Live, 2025–present</span></li>
           <li><strong><a href="https://levels.io" target="_blank" rel="noreferrer">Levels</a></strong> — a quiet little app for measuring the things that actually move: sleep, focus, pages read. No streaks, no shame. <span class="status">· In beta, 2025–present</span></li>
-          <li><strong>Learnor</strong> — a side project, if I'm being honest. A learning platform for the curious adult, short courses by people who actually do the thing. Good idea, just never the main thing. <span class="status">· On hold, 2021–2023</span></li>
+          <li id="learnor"><strong>Learnor</strong> — a side project, if I'm being honest. A learning platform for the curious adult, short courses by people who actually do the thing. Good idea, just never the main thing. <span class="status">· On hold, 2021–2023</span></li>
         </ul>
 
         <blockquote>Build companies. Stay small. Keep going.</blockquote>

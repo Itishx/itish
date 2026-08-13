@@ -74,52 +74,31 @@ document.querySelectorAll('.hero-frame, .polaroid-frame').forEach((frame) => {
   if (img.complete && img.naturalWidth === 0) markEmpty();
 });
 
-// Search: highlights every match in this page's article
-const searchInput = document.getElementById('searchInput');
-const proseBlocks = document.querySelectorAll('.prose');
-
-function clearHits() {
-  document.querySelectorAll('mark.search-hit').forEach((m) => {
-    const parent = m.parentNode;
-    m.replaceWith(document.createTextNode(m.textContent));
-    parent.normalize();
+// Mega menu: the Explore trigger toggles a full-width dropdown
+const megaTrigger = document.getElementById('megaTrigger');
+const megaMenu = document.getElementById('megaMenu');
+const megaBackdrop = document.getElementById('megaBackdrop');
+if (megaTrigger && megaMenu) {
+  const closeMega = () => {
+    megaMenu.classList.remove('open');
+    megaBackdrop?.classList.remove('open');
+    megaTrigger.classList.remove('open');
+    megaTrigger.setAttribute('aria-expanded', 'false');
+  };
+  const openMega = () => {
+    megaMenu.classList.add('open');
+    megaBackdrop?.classList.add('open');
+    megaTrigger.classList.add('open');
+    megaTrigger.setAttribute('aria-expanded', 'true');
+  };
+  megaTrigger.setAttribute('aria-expanded', 'false');
+  megaTrigger.addEventListener('click', () => {
+    if (megaMenu.classList.contains('open')) closeMega(); else openMega();
   });
-}
-
-function highlight(root, query) {
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-  const matches = [];
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-    if (node.textContent.toLowerCase().includes(query)) matches.push(node);
-  }
-  matches.forEach((node) => {
-    const frag = document.createDocumentFragment();
-    let text = node.textContent;
-    let idx;
-    while ((idx = text.toLowerCase().indexOf(query)) !== -1) {
-      frag.appendChild(document.createTextNode(text.slice(0, idx)));
-      const mark = document.createElement('mark');
-      mark.className = 'search-hit';
-      mark.textContent = text.slice(idx, idx + query.length);
-      frag.appendChild(mark);
-      text = text.slice(idx + query.length);
-    }
-    frag.appendChild(document.createTextNode(text));
-    node.replaceWith(frag);
-  });
-}
-
-if (searchInput) {
-  searchInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') { searchInput.value = ''; clearHits(); return; }
-    if (event.key !== 'Enter') return;
-    clearHits();
-    const query = searchInput.value.trim().toLowerCase();
-    if (!query) return;
-    proseBlocks.forEach((block) => highlight(block, query));
-    const first = document.querySelector('mark.search-hit');
-    if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  megaBackdrop?.addEventListener('click', closeMega);
+  megaMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMega));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMega();
   });
 }
 
@@ -133,11 +112,3 @@ if (clapBtn && clapCount) {
     clapCount.textContent = claps;
   });
 }
-
-// Follow buttons toggle
-document.querySelectorAll('.follow-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const followed = btn.classList.toggle('followed');
-    btn.textContent = followed ? 'Following' : 'Follow';
-  });
-});
