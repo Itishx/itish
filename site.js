@@ -15,10 +15,25 @@ if (themeBtn) {
   });
 }
 
-// Footer photo band: activates when footer-bg.jpg exists in the folder
-const footerProbe = new Image();
-footerProbe.onload = () => document.querySelector('footer').classList.add('has-bg');
-footerProbe.src = 'footer-bg.jpg';
+// Footer newsletter: arrow toggles the hidden panel open/closed
+const newsToggle = document.getElementById('newsToggle');
+const newsPanel = document.getElementById('newsPanel');
+if (newsToggle && newsPanel) {
+  newsToggle.addEventListener('click', () => {
+    const open = newsPanel.classList.toggle('open');
+    newsToggle.classList.toggle('open', open);
+    newsToggle.setAttribute('aria-expanded', String(open));
+  });
+}
+
+const newsForm = document.getElementById('newsForm');
+if (newsForm) {
+  newsForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    newsForm.hidden = true;
+    document.getElementById('newsDone').hidden = false;
+  });
+}
 
 // Hero photo frames: show the placeholder until the page's hero image exists
 document.querySelectorAll('.hero-frame').forEach((frame) => {

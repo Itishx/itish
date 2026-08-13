@@ -172,11 +172,57 @@
 
     </main>
 
-    <footer>
-      <div class="footer-inner">
-        <span>© 2026 Creatish Inc.</span>
-        <a href="mailto:hi@itish.io">hi@itish.io</a>
-        <a href="https://instagram.com/writix" target="_blank" rel="noreferrer">@writix</a>
+    <footer class="mega-footer">
+      <div class="foot-wrap">
+        <button class="newsletter-toggle" id="newsToggle" aria-expanded="false" aria-controls="newsPanel">
+          <span class="nt-label">The Profound Shit Newsletter</span>
+          <span class="nt-hint">Occasional essays. No spam. Only profound shit.</span>
+          <svg class="chev" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="newsletter-panel" id="newsPanel">
+          <div class="np-inner">
+            <p>One email whenever something real ships or something true gets written. That's the whole promise.</p>
+            <form class="news-form" id="newsForm">
+              <input type="email" placeholder="you@wherever.com" required aria-label="Email address" />
+              <button type="submit">Subscribe</button>
+            </form>
+            <p class="news-done" id="newsDone" hidden>You're in. Profound shit incoming.</p>
+          </div>
+        </div>
+
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <div class="fb-mark">Creatish Inc.</div>
+            <p>A company that builds other companies, operated by one person with founder-level obsession.</p>
+          </div>
+          <div class="foot-col">
+            <h4>Read</h4>
+            <a href="index.html">Home</a>
+            <a href="writix.html">Writix</a>
+            <a href="creatish.html">Creatish</a>
+          </div>
+          <div class="foot-col">
+            <h4>Ventures</h4>
+            <a href="creatish.html">Braino</a>
+            <a href="https://sidebrain.co" target="_blank" rel="noreferrer">Sidebrain</a>
+            <a href="https://realyst.app" target="_blank" rel="noreferrer">Realyst</a>
+            <a href="https://levels.io" target="_blank" rel="noreferrer">Levels</a>
+          </div>
+          <div class="foot-col">
+            <h4>Connect</h4>
+            <a href="mailto:hi@itish.io">hi@itish.io</a>
+            <a href="https://instagram.com/writix" target="_blank" rel="noreferrer">@writix</a>
+            <a href="mailto:hi@itish.io">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot-giant">Creatish Inc.</div>
+      <img class="foot-image" src="footer-bg.jpg" alt="" onerror="this.style.display='none'" />
+
+      <div class="foot-wrap foot-bottom">
+        <span>© 2026 Creatish Inc. All rights reserved.</span>
+        <span>Build companies. Stay small. Keep going.</span>
       </div>
     </footer>
   </div>
