@@ -35,8 +35,38 @@ if (newsForm) {
   });
 }
 
+// Hamburger: toggles the mobile nav drawer
+const hamburger = document.querySelector('.hamburger');
+const sidebar = document.querySelector('.sidebar');
+const navBackdrop = document.getElementById('navBackdrop');
+if (hamburger && sidebar) {
+  const closeNav = () => {
+    sidebar.classList.remove('open');
+    navBackdrop?.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+  };
+  const openNav = () => {
+    sidebar.classList.add('open');
+    navBackdrop?.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('nav-open');
+  };
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.addEventListener('click', () => {
+    if (sidebar.classList.contains('open')) closeNav(); else openNav();
+  });
+  navBackdrop?.addEventListener('click', closeNav);
+  sidebar.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeNav();
+  });
+}
+
 // Hero photo frames: show the placeholder until the page's hero image exists
-document.querySelectorAll('.hero-frame').forEach((frame) => {
+document.querySelectorAll('.hero-frame, .polaroid-frame').forEach((frame) => {
   const img = frame.querySelector('img');
   if (!img) return;
   const markEmpty = () => frame.classList.add('empty');
