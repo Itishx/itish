@@ -35,6 +35,16 @@ if (newsForm) {
   });
 }
 
+// Profound Shit hero: same subscribe-then-confirm pattern as the footer
+const psSubscribeForm = document.getElementById('psSubscribeForm');
+if (psSubscribeForm) {
+  psSubscribeForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    psSubscribeForm.hidden = true;
+    document.getElementById('psSubscribeDone').hidden = false;
+  });
+}
+
 // Hamburger: toggles the mobile nav drawer
 const hamburger = document.querySelector('.hamburger');
 const sidebar = document.querySelector('.sidebar');

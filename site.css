@@ -815,3 +815,292 @@ body.nav-open { overflow: hidden; }
   .prose { font-size: 18px; }
   .nav-right .link { display: none; }
 }
+
+/* ── Profound Shit blog — its own visual identity, deliberately not the ── */
+/* ── Medium-styled shell the rest of the site uses.                     ── */
+
+body.ps-page .nav-center { left: 50%; }
+body.ps-page .hamburger { display: none !important; }
+
+.ps-hero {
+  background: #0a0a0a;
+  color: #f2f0ec;
+  padding: 88px 24px 72px;
+}
+
+.ps-hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.ps-eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+  margin-bottom: 18px;
+}
+
+.ps-hero h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
+  color: #fff;
+}
+
+.ps-hero p {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.65;
+  color: #c7c4bd;
+  margin: 0 0 20px;
+  max-width: 62ch;
+}
+
+.ps-hero p:last-of-type { margin-bottom: 0; }
+
+.ps-tag {
+  display: inline-block;
+  margin-top: 28px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: #7a7a7a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  padding: 6px 14px;
+}
+
+.ps-subscribe {
+  margin-top: 32px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 460px;
+}
+
+.ps-subscribe input {
+  flex: 1;
+  min-width: 200px;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 100px;
+  padding: 13px 20px;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 15px;
+  outline: none;
+}
+
+.ps-subscribe input:focus { border-color: var(--green); }
+
+.ps-subscribe button {
+  background: var(--green);
+  color: #fff;
+  border: 0;
+  border-radius: 100px;
+  padding: 13px 26px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ps-subscribe button:hover { background: #22a51e; }
+
+.ps-subscribe-done {
+  margin-top: 16px;
+  color: #6fdd6b;
+  font-family: var(--sans);
+  font-weight: 600;
+}
+
+.ps-grid-wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+.ps-grid-label {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.ps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.ps-card {
+  display: block;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+a.ps-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1); }
+
+.ps-card.featured { grid-column: 1 / -1; }
+
+.ps-card-block {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  aspect-ratio: 4 / 3;
+}
+
+.ps-card.featured .ps-card-block { aspect-ratio: 21 / 8; align-items: flex-start; }
+
+.ps-card-num {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ps-card-tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ps-card-body { padding: 22px 24px 26px; }
+
+.ps-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.ps-card.featured h3 { font-size: 32px; }
+
+.ps-card p {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.ps-card .ps-date {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.ps-c1 { background: linear-gradient(135deg, #14331a, #1a8917 140%); }
+.ps-c2 { background: linear-gradient(135deg, #3a1a10, #c2571a 140%); }
+.ps-c3 { background: linear-gradient(135deg, #131a33, #3b4c9e 140%); }
+.ps-c4 { background: linear-gradient(135deg, #331321, #b0456b 140%); }
+.ps-c5 { background: linear-gradient(135deg, #33280f, #c89b2c 140%); }
+
+@media (max-width: 700px) {
+  .ps-grid { grid-template-columns: 1fr; }
+  .ps-card.featured .ps-card-block { aspect-ratio: 16 / 9; align-items: flex-end; }
+}
+
+/* Single post template */
+.ps-post-hero {
+  background: #0a0a0a;
+  color: #f2f0ec;
+  padding: 48px 24px 56px;
+}
+
+.ps-post-hero-inner { max-width: 720px; margin: 0 auto; }
+
+.ps-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: #9a9a9a;
+  margin-bottom: 28px;
+}
+
+.ps-back:hover { color: #fff; }
+
+.ps-post-hero .ps-card-tag { display: block; margin-bottom: 16px; }
+
+.ps-post-hero h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(34px, 6vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: #fff;
+  margin: 0 0 18px;
+}
+
+.ps-post-meta {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: #8a8a8a;
+}
+
+.ps-post-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.ps-post-body p { margin: 0 0 1.5em; }
+
+.ps-post-body p:first-of-type::first-letter {
+  font-size: 3.4em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.8;
+  margin: 0.06em 0.08em 0 0;
+  color: var(--green);
+}
+
+.ps-post-body blockquote {
+  margin: 1.6em 0 2em;
+  padding: 28px 32px;
+  background: var(--faint);
+  border-left: 4px solid var(--green);
+  border-radius: 4px;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.ps-post-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 24px 80px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ps-post-footer a { font-family: var(--sans); font-size: 14.5px; }
