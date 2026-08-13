@@ -7,7 +7,7 @@ if (toggle) toggle.addEventListener('click', () => {
 });
 
 // Typewriter
-const words = ['startups.', 'products.', 'things that matter.', 'from zero.', 'for people.', 'what I love.'];
+const words = ['companies.', 'products.', 'things that matter.', 'from zero.', 'with taste.', 'by one person.'];
 let wi = 0, ci = 0, deleting = false;
 const el = document.getElementById('typeword');
 if (el) {

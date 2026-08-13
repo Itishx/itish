@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Logo - Creatish Inc.</title>
+  <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f1ece1;
+      --paper-2: #e5dfd0;
+      --ink: #0a0a0a;
+      --muted: #6e685c;
+      --rule: #c9c2af;
+      --accent: #ff3b2f;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    html.dark {
+      --paper: #0a0a0a;
+      --paper-2: #161614;
+      --ink: #f1ece1;
+      --muted: #8a8275;
+      --rule: #2c2a25;
+      --accent: #ff6853;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .topnav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 0 14px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-style: italic;
+      letter-spacing: -0.01em;
+    }
+
+    .brand .dot { color: var(--accent); }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .links a {
+      padding: 8px 14px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+    }
+
+    .links a:hover,
+    .links a.active {
+      color: var(--ink);
+      border-color: var(--rule);
+      background: rgba(10, 10, 10, 0.04);
+    }
+
+    html.dark .links a:hover,
+    html.dark .links a.active {
+      background: rgba(241, 236, 225, 0.06);
+    }
+
+    .theme-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid var(--rule);
+      background: transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .theme-btn .moon {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--ink);
+      display: block;
+    }
+
+    main {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      place-items: center;
+      padding: 72px 0;
+    }
+
+    .logo-shell {
+      width: 100%;
+    }
+
+    .label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .label-row span:first-child {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .logo-stage {
+      display: grid;
+      place-items: center;
+      min-height: 380px;
+      border-top: 4px solid var(--ink);
+      border-bottom: 4px solid var(--ink);
+      background-color: var(--paper-2);
+      background-image:
+        linear-gradient(45deg, rgba(10, 10, 10, 0.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(10, 10, 10, 0.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(10, 10, 10, 0.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(10, 10, 10, 0.08) 75%);
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+      background-size: 24px 24px;
+      padding: 48px;
+    }
+
+    html.dark .logo-stage {
+      background-image:
+        linear-gradient(45deg, rgba(241, 236, 225, 0.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(241, 236, 225, 0.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(241, 236, 225, 0.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(241, 236, 225, 0.08) 75%);
+    }
+
+    canvas {
+      width: min(100%, 920px);
+      height: auto;
+      display: block;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .note {
+      margin: 0;
+      max-width: 48ch;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    button.download {
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 14px 18px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    button.download:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .download-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button.download.alt {
+      background: #f1ece1;
+      color: #0a0a0a;
+      border-color: #0a0a0a;
+    }
+
+    button.download.alt:hover {
+      background: #ffffff;
+      border-color: var(--accent);
+      color: #0a0a0a;
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        width: min(100% - 32px, 1120px);
+      }
+
+      .links a:not(.active) {
+        display: none;
+      }
+
+      main {
+        padding: 48px 0;
+      }
+
+      .logo-stage {
+        min-height: 260px;
+        padding: 28px;
+      }
+
+      .actions {
+        align-items: stretch;
+      }
+
+      .download-row,
+      button.download {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="topnav">
+      <a href="index.html" class="brand">Creatish Inc<span class="dot">.</span></a>
+      <div class="links">
+        <a href="index.html#braino">Braino</a>
+        <a href="builds.html">Companies</a>
+        <a href="logo.html" class="active">Logo</a>
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"><span class="moon"></span></button>
+      </div>
+    </nav>
+
+    <main>
+      <section class="logo-shell" aria-labelledby="logoTitle">
+        <div class="label-row">
+          <span id="logoTitle">Transparent PNG</span>
+          <span>Creatish Inc. wordmark</span>
+        </div>
+
+        <div class="logo-stage">
+          <canvas id="logoCanvas" width="1800" height="620" aria-label="Creatish Inc. logo preview"></canvas>
+        </div>
+
+        <div class="actions">
+          <p class="note">The preview uses a checkerboard only to show transparency. Both downloaded PNGs have no background.</p>
+          <div class="download-row">
+            <button class="download" id="downloadBlackLogo" type="button">Download black PNG</button>
+            <button class="download alt" id="downloadWhiteLogo" type="button">Download white PNG</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        drawPreview();
+      });
+    }
+
+    const logoText = 'Creatish Inc.';
+    const previewCanvas = document.getElementById('logoCanvas');
+    const downloadBlackButton = document.getElementById('downloadBlackLogo');
+    const downloadWhiteButton = document.getElementById('downloadWhiteLogo');
+
+    function drawLogo(canvas, color) {
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width;
+      const height = canvas.height;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      let fontSize = Math.floor(height * 0.44);
+      do {
+        ctx.font = `italic ${fontSize}px "Instrument Serif", Georgia, serif`;
+        fontSize -= 4;
+      } while (ctx.measureText(logoText).width > width * 0.84 && fontSize > 80);
+
+      ctx.fillText(logoText, width / 2, height / 2);
+    }
+
+    async function readyFonts() {
+      if (!document.fonts) return;
+      await document.fonts.load('italic 260px "Instrument Serif"');
+      await document.fonts.ready;
+    }
+
+    async function drawPreview() {
+      await readyFonts();
+      const isDark = document.documentElement.classList.contains('dark');
+      drawLogo(previewCanvas, isDark ? '#f1ece1' : '#0a0a0a');
+    }
+
+    async function downloadLogo(color, filename) {
+      await readyFonts();
+      const canvas = document.createElement('canvas');
+      canvas.width = 3200;
+      canvas.height = 1100;
+      drawLogo(canvas, color);
+
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    downloadBlackButton.addEventListener('click', () => {
+      downloadLogo('#0a0a0a', 'creatish-inc-logo-black-transparent.png');
+    });
+
+    downloadWhiteButton.addEventListener('click', () => {
+      downloadLogo('#ffffff', 'creatish-inc-logo-white-transparent.png');
+    });
+
+    drawPreview();
+  </script>
+</body>
+</html>
